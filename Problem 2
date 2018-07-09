@@ -1,0 +1,32 @@
+public class Project2 {
+    private static  ArrayList<Integer> fibonacci;
+    private static BigInteger two;
+
+    public static void main(String[] args) {
+        initialize();
+
+        findFibonacciNumbers();
+
+        BigInteger bl=fibonacci.stream()
+                .map(BigInteger::valueOf)
+                .filter(a->a.mod(two)==BigInteger.ZERO)
+                .reduce(BigInteger::add).get();
+
+        System.out.println(bl);
+    }
+
+    private static void initialize() {
+        fibonacci=new ArrayList<>();
+        two=BigInteger.valueOf(2);
+        fibonacci.add(1);
+    }
+    private static void findFibonacciNumbers(){
+        while (fibonacci.get(fibonacci.size()-1)<4000000){
+            if (fibonacci.size()==1)
+                fibonacci.add(2);
+            else{
+                fibonacci.add(fibonacci.get(fibonacci.size()-1)+fibonacci.get(fibonacci.size()-2));
+            }
+        }
+    }
+}
