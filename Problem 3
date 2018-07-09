@@ -1,0 +1,26 @@
+import java.math.BigInteger;
+import java.util.stream.IntStream;
+
+public class Project3 {
+    public static void main(String[] args) {
+        BigInteger a=new BigInteger("600851475143");
+        int b= IntStream
+                .rangeClosed(2,(a.sqrt().add(BigInteger.ONE)).intValue())
+                .filter(Project3::isPrime)
+                .filter(c->a.mod(BigInteger.valueOf(c))==BigInteger.ZERO)
+                .max().getAsInt();
+        System.out.println(b);
+    }
+    private static boolean isPrime(int num){
+        if ( num > 2 && num%2 == 0 ) {
+            return false;
+        }
+        int top = (int)Math.sqrt(num) + 1;
+        for(int i = 3; i < top; i+=2){
+            if(num % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
