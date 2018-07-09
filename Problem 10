@@ -1,0 +1,30 @@
+public class Project10 {
+    private static int range;
+    private static long sum;
+    public static void main(String[] args) {
+        initialize();
+        for (int i=2;i<range;i++)
+            if (isPrime(i))
+                sum+=(long) i;
+
+        System.out.println(sum);
+    }
+
+    private static void initialize() {
+        range=2000000;
+        sum=0;
+    }
+
+    public static boolean isPrime(int num){
+        if ( num > 2 && num%2 == 0 ) {
+            return false;
+        }
+        int top = (int)Math.sqrt(num) + 1;
+        for(int i = 3; i < top; i+=2){
+            if(num % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
