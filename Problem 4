@@ -1,0 +1,22 @@
+
+import java.util.stream.IntStream;
+
+public class Project4 {
+    public static void main(String[] args) {
+
+        int result= IntStream
+                .rangeClosed(100,999)
+                .flatMap(a->
+                                IntStream.rangeClosed(100,999)
+                                .filter((b)->{
+                                    int x=a*b;
+                                    String as=String.valueOf(x);
+                                    String sa=new StringBuilder(as).reverse().toString();
+                                    return ((Integer.valueOf(as.compareTo(sa))==0) ? true:false);
+                                })
+                                .map(b->a*b))
+
+                .max().getAsInt();
+        System.out.println(result);
+    }
+}
