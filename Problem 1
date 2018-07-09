@@ -1,0 +1,20 @@
+import java.util.*;
+
+public class Project1 {
+    public static void main(String[] args) {
+        Set<Long> number3A5=new HashSet<>();
+        long sum=0;
+        int bound=Math.max(1000/3,1000/5);
+
+        for (int i=1;i<bound+1;i++){
+                number3A5.add((long)(3*i));
+            if (i*5<1000)
+                number3A5.add((long)(5*i));
+        }
+        Iterator<Long> iterator=number3A5.iterator();
+
+        while (iterator.hasNext())
+            sum+=iterator.next();
+        System.out.println(sum);
+    }
+}
