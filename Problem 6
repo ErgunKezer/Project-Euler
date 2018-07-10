@@ -1,0 +1,21 @@
+import java.math.BigInteger;
+import java.util.stream.IntStream;
+
+public class Project6 {
+    public static void main(String[] args) {
+        BigInteger first= IntStream.rangeClosed(1,100)
+                .mapToObj(BigInteger::valueOf)
+                .map(a->a.pow(2))
+                .reduce(BigInteger::add).get();
+
+        BigInteger second= IntStream.rangeClosed(1,100)
+                .mapToObj(BigInteger::valueOf)
+                .reduce(BigInteger::add)
+                .map(a->a.pow(2))
+                .get();
+                
+        System.out.println(first);
+        System.out.println(second);
+        System.out.println(second.subtract(first));
+    }
+}
