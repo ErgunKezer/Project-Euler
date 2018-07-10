@@ -1,0 +1,66 @@
+import java.util.*;
+
+public class Project5 {
+    private static ArrayList<Integer> tempArrayList;
+    private static ArrayList<Integer> tempArrayList1;
+    private static ArrayList<Integer> finall;
+
+    public static void main(String[] args) {
+        initialize();
+        for (int i=2;i<20;i++) {
+            tempArrayList1 = primeFactors(i);
+            if (tempArrayList1.size() > 0) {
+                finall=combination(finall, tempArrayList1);
+                tempArrayList.clear();
+            }
+        }
+        int result=finall.stream()
+                .reduce(1,(a,b)->a*b);
+
+        System.out.println(result);
+    }
+
+    private static void initialize() {
+            tempArrayList=new ArrayList<>();
+            tempArrayList1=new ArrayList<>();
+            finall=new ArrayList<>();
+    }
+
+    private static ArrayList<Integer> primeFactors(int n)
+    {
+        while (n%2==0)
+        {
+            tempArrayList.add(2);
+            n /= 2;
+        }
+        for (int i = 3; i <= Math.sqrt(n); i++)
+            if (isPrime(i))
+                while (n%i == 0)
+                {
+                    tempArrayList.add(i);
+                    n /= i;
+                }
+                if (n>2)
+                    tempArrayList.add(n);
+        return tempArrayList;
+    }
+    private static boolean isPrime(int num){
+        if ( num > 2 && num%2 == 0 ) {
+            return false;
+        }
+        int top = (int)Math.sqrt(num) + 1;
+        for(int i = 3; i < top; i+=2){
+            if(num % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+    private static ArrayList<Integer>  combination(ArrayList<Integer> list1,ArrayList<Integer> list2){
+        for (int i =0;i<list1.size();i++)
+            if (list2.contains(list1.get(i)))
+                list2.remove(list1.get(i));
+        list1.addAll(list2);
+        return list1;
+    }
+}
