@@ -1,0 +1,25 @@
+public class Project7 {
+    public static void main(String[] args) {
+        Stream<Integer> infiniteStream= Stream
+                .iterate(2,i->i+1);
+        int result=infiniteStream
+                .filter(Project7::isPrime)
+                .limit(10001)
+                .sorted()
+                .max(Integer::compareTo)
+                .get();
+        System.out.println(result);
+    }
+    public static boolean isPrime(int num){
+        if ( num > 2 && num%2 == 0 ) {
+            return false;
+        }
+        int top = (int)Math.sqrt(num) + 1;
+        for(int i = 3; i < top; i+=2){
+            if(num % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
