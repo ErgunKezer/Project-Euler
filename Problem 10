@@ -1,0 +1,33 @@
+
+import java.util.stream.LongStream;
+
+public class Project10 {
+    private static int range;
+    private static long sum;
+    public static void main(String[] args) {
+        initialize();
+
+        sum= LongStream.rangeClosed(2,range)
+                .filter(Project10::isPrime)
+                .reduce(Long::sum).getAsLong();
+        System.out.println(sum);
+    }
+
+    private static void initialize() {
+        range=2000000;
+        sum=0;
+    }
+
+    public static boolean isPrime(long num){
+        if ( num > 2 && num%2 == 0 ) {
+            return false;
+        }
+        int top = (int)Math.sqrt(num) + 1;
+        for(int i = 3; i < top; i+=2){
+            if(num % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
