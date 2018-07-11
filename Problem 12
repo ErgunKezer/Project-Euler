@@ -1,0 +1,27 @@
+public class Project12 {
+    public static void main(String[] args) {
+        int x=1;
+        int numberOfDivisors=0;
+        while (numberOfDivisors<500){
+            int temp=recur(x);
+            for (int i=1;i<=temp/2;i++){
+                if (x%i==0)
+                    numberOfDivisors++;
+            }
+
+            if (numberOfDivisors>=500)
+                System.out.println("Number is : "+x);
+            else {
+                System.out.println(temp +" " + x);
+                x++;
+                numberOfDivisors=0;
+            }
+        }
+    }
+    private static int recur(int i){
+        if(i==1)
+            return 1;
+        else
+            return i+recur(i-1);
+    }
+}
