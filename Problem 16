@@ -1,0 +1,26 @@
+
+import java.math.BigInteger;
+
+public class Project16 {
+    private static long result;
+    public static void main(String[] args) {
+        result=0;
+        BigInteger b=new BigInteger("2").pow(1000);
+
+        //Solve with normal code
+        char[] resultA=b.toString().toCharArray();
+        for (int i=0;i<resultA.length;i++)
+            result += (long) resultA[i]-'0';
+        System.out.println("Result is "+result);
+
+        //Solve with Java stream
+        int ass= b
+                .toString()
+                .chars()
+                .map(c->(char) c)
+                .map(d->Character.getNumericValue(d))
+                .reduce(Integer::sum).getAsInt();
+        System.out.println("Result is "+ass);
+
+    }
+}
