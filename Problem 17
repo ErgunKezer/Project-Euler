@@ -1,0 +1,63 @@
+
+
+public class Project17 {
+    private static String[] ones = { "", "one", "two", "three", "four", "five",
+            "six", "seven", "eight", "nine", "ten", "eleven", "twelve",
+            "thirteen", "fourteen", "fifteen", "sixteen", "seventeen",
+            "eighteen", "nineteen" };
+
+    private static String[] tens = { "", "ten", "twenty", "thirty", "forty",
+            "fifty", "sixty", "seventy", "eighty", "ninety" };
+
+    private static String[] hundreds = { "", "oneHundred", "twoHundred",
+            "threeHundred", "fourHundred", "fiveHundred", "sixHundred",
+            "sevenHundred", "eightHundred", "nineHundred", "oneThousand" };
+    static int first,second,third;
+    public static void main(String[] args) {
+        long start=System.currentTimeMillis();
+        StringBuilder stringBuilder=new StringBuilder();
+        for (int i=1;i<=1000;i++) {
+            if (i < 20)
+                stringBuilder.append(ones[i]);
+            else if (i<100)
+            {
+                 first=i%10;
+                 second=i/10;
+                 if (first==0)
+                     stringBuilder.append(tens[second]);
+                 else{
+                     stringBuilder.append(tens[second]);
+                     stringBuilder.append(ones[first]);
+                 }
+            }
+            else {
+                third=i/100;
+                second=(i%100)/10;
+                first=i%10;
+
+                if (third==10)
+                    stringBuilder.append(hundreds[hundreds.length-1]);
+                else if (i%100==0){
+                    stringBuilder.append(hundreds[third]);
+                }
+                else {
+                    stringBuilder.append(hundreds[third]);
+                    stringBuilder.append("and");
+                    if (i%100<20)
+                        stringBuilder.append(ones[i%100]);
+                    else {
+                        stringBuilder.append(tens[second]);
+                        stringBuilder.append(ones[first]);
+                    }
+                }
+            }
+        }
+        String result= stringBuilder.toString();
+        char[] resultC=result.toCharArray();
+        //System.out.println(result);
+        System.out.println(String.valueOf("There is "+resultC.length+" words between 1 to 1000."));
+        long end=System.currentTimeMillis();
+        System.out.println("Time is " + (end-start)+" ms.");
+
+    }
+}
