@@ -1,0 +1,47 @@
+
+public class Project27 {
+    private static int maxA,maxB,count;
+    public static void main(String[] args) {
+
+        initialize();
+
+        for (int a=-1000;a<=1000;a++){
+            for (int b=-1000;b<=1000;b++){
+                int tempCount=findAllPrimes(a,b);
+                if (tempCount>count){
+                    count=tempCount;
+                    maxA=a;
+                    maxB=b;
+                }
+            }
+        }
+        System.out.println(count);
+        System.out.println(maxA*maxB);
+    }
+    private static void initialize(){
+        count=0;
+    }
+    private static boolean isPrime(int num){
+        if ( num > 2 && num%2 == 0 ) {
+            return false;
+        }
+        int top = (int)Math.sqrt(num) + 1;
+        for(int i = 3; i < top; i+=2){
+            if(num % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static int findAllPrimes(int a,int b){
+        int count=0;
+        for (int n=0;;n++){
+            int equation=(int)Math.pow(n,2)+a*n+b;
+            if (equation>0 && isPrime(equation))
+                count++;
+            else
+                return count;
+        }
+    }
+}
