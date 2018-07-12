@@ -1,0 +1,82 @@
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class Project32 {
+    private static int second;
+    private static long sum;
+    private static List<Character> charactersList1;
+    private static List<Character> charactersList2;
+    private static List<Character> charactersList3;
+    private static Set<Long> longSet;
+
+    public static void main(String[] args) {
+
+        initialize();
+
+        for (int i=1;i<100;i++){
+            for (int j=2;second<10;j++) {
+                charactersList1 = String.valueOf(i)
+                        .chars()
+                        .mapToObj(as -> (char) as)
+                        .collect(Collectors.toList());
+
+                charactersList2 = String.valueOf(j)
+                        .chars()
+                        .mapToObj(as -> (char) as)
+                        .collect(Collectors.toList());
+
+                if (retainAll(charactersList1, charactersList2)) {
+
+                    long product = i * j;
+                    charactersList1 = String.valueOf(i)
+                            .chars()
+                            .mapToObj(as -> (char) as)
+                            .collect(Collectors.toList());
+
+                    charactersList3 = String.valueOf(product)
+                            .chars()
+                            .mapToObj(as -> (char) as)
+                            .collect(Collectors.toList());
+
+                    charactersList3.addAll(charactersList2);
+                    charactersList3.addAll(charactersList1);
+
+                    charactersList3 = charactersList3
+                            .stream()
+                            .sorted()
+                            .collect(Collectors.toList());
+
+                    String a = charactersList3
+                            .stream()
+                            .map(Object::toString)
+                            .collect(Collectors.joining());
+
+                    if (a.equals("123456789")) {
+                        longSet.add(product);
+                        System.out.println(i + " " + j + " : " + product);
+                    }
+                    second = charactersList3.size();
+                }
+            }
+            second=0;
+            }
+
+            sum=longSet
+                    .stream()
+                    .collect(Collectors.summingLong(p->p));
+
+            System.out.println(sum);
+
+    }
+
+    private static void initialize(){
+        second=0;
+        sum=0;
+        longSet=new HashSet<>();
+    }
+    private static boolean retainAll(List<Character> first,List<Character> second){
+        return first.retainAll(second);
+    }
+}
