@@ -1,0 +1,34 @@
+
+import java.math.BigInteger;
+
+public class Project25 {
+    private static String result;
+    private static StringBuilder stringBuilder;
+    private static BigInteger bigIntegerOld;
+    private static BigInteger bigIntegerOlder;
+    private static BigInteger neW;
+    private static int index;
+
+    public static void main(String[] args) {
+        initialize();
+
+        while (result.length()!=1000){
+            neW=bigIntegerOlder.add(bigIntegerOld);
+            bigIntegerOlder=bigIntegerOld;
+            bigIntegerOld=neW;
+            result=neW.toString();
+            index++;
+        }
+        System.out.println(result);
+        System.out.println(index);
+    }
+
+    private static void initialize(){
+        result="";
+        stringBuilder=new StringBuilder();
+        bigIntegerOld=BigInteger.ONE;
+        bigIntegerOlder=BigInteger.ONE;
+        neW=BigInteger.ZERO;
+        index=2;
+    }
+}
