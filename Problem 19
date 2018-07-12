@@ -1,0 +1,99 @@
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+
+public class Project19 {
+
+    private static int[] daysOfMonths={31,28,31,30,31,30,31,31,30,31,30,31};
+    private static List<Integer> numberDayOfMonths=new ArrayList<>();
+    private static ArrayList<Integer> temp;
+    private static int count,gap;
+
+    public static void main(String[] args) {
+
+        initialize();
+
+        for(int i=1901;i<2001;i++){
+            if ((i%100)%4==0)
+                numberDayOfMonths.set(1,29);
+            else
+                numberDayOfMonths.set(1,28);
+
+            for (int j=0;j<numberDayOfMonths.size();j++){
+
+                if (j==0){
+                    temp.add(gap);
+                    if (gap==6)
+                        count++;
+                    if (temp.get(j)==6)
+                        System.out.println((j+1)+" month is "+temp.get(j)+" "+i);
+                    gap=gap+numberDayOfMonths.get(j)%7;
+                    gap=gap%7;
+                    if (gap==0)
+                        temp.add(gap);
+                }
+                else {
+
+                    int x=numberDayOfMonths.get(j);
+
+                    if (temp.size() > j) {
+                         if (temp.get(j)==6)
+                            System.out.println((j+1)+" month is "+temp.get(j)+" "+i);
+                        x = numberDayOfMonths.get(j);
+                        gap = gap + x % 7;
+                        gap = gap % 7;
+                        temp.add(gap);
+                        if (!(temp.size()>numberDayOfMonths.size()))
+                            if (gap==6)
+                                count++;
+                        continue;
+                    }
+                    else {
+                        gap = gap + x % 7;
+                        gap = gap % 7;
+                        if (x % 7 == 0) {
+                            temp.add(gap);
+
+                            if (gap==6)
+                                count++;
+
+                              if (temp.get(j)==6)
+                                System.out.println((j+1)+" month is "+temp.get(j)+" "+i);
+                            temp.add(gap);
+
+                            if (gap==6)
+                                count++;
+                            j++;
+                              if (temp.get(j)==6)
+                                System.out.println((j+1)+" month is "+temp.get(j)+" "+i);
+                            int y = numberDayOfMonths.get(j);
+                            gap = gap + y % 7;
+                            gap = gap % 7;
+                            temp.add(gap);
+                            if (gap==6)
+                                count++;
+                            continue;
+                        }
+                        else {
+                            temp.add(gap);
+                            if (gap==6)
+                                count++;
+                              if (temp.get(j)==6)
+                                System.out.println((j+1)+" month is "+temp.get(j)+" "+i);
+                        }
+                    }
+                }
+            }
+            temp.clear();
+
+        }
+        System.out.println(count);
+    }
+    private static void initialize() {
+        count = 0;
+        gap = 1;
+        temp = new ArrayList<>();
+        numberDayOfMonths = Arrays.stream(daysOfMonths).boxed().collect(Collectors.toList());
+    }
+}
