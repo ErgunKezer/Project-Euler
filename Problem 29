@@ -1,0 +1,30 @@
+import java.math.BigInteger;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
+
+
+public class Project29 {
+    private static Set set=new HashSet<>();
+    public static void main(String[] args) {
+        long t0=System.nanoTime();
+        set.addAll(
+                LongStream.rangeClosed(2, 100)
+                        .mapToObj(BigInteger::valueOf)
+                        .flatMap((a) ->
+                                LongStream
+                                        .rangeClosed(2, 100)
+                                        .mapToObj(BigInteger::valueOf)
+                                        .map(b -> a.pow(b.intValue()))
+                        )
+                        .collect(Collectors.toList()));
+
+        int count=(int)set.stream().count();
+        System.out.println(count);
+        long t1=System.nanoTime();
+        long millis= TimeUnit.NANOSECONDS.toMillis(t1-t0);
+        System.out.println("took: "+millis+" ms");
+
+    }
+}
