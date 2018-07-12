@@ -1,0 +1,49 @@
+import java.math.BigInteger;
+import java.net.URL;
+import java.util.*;
+
+public class Project22 {
+    static int a;
+    static String temp;
+    static ArrayList<String> arrayList;
+    static BigInteger result=new BigInteger("0"),sumOld;
+    public static void main(String[] args) {
+        a=0;
+        arrayList=new ArrayList<>();
+
+        try {
+            URL url=new URL("https://projecteuler.net/project/resources/p022_names.txt");
+            Scanner s=new Scanner(url.openStream());
+            temp=s.nextLine();
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        String[] array=temp.split(",");
+
+        for (int i=0;i<array.length;i++) {
+            arrayList.add(array[i]);
+            Collections.sort(arrayList, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareTo(o2);
+                }
+            });
+        }
+        for (int i=0;i<arrayList.size();i++){
+            charAndSum(arrayList,i);
+        }
+        System.out.println(result);
+    }
+    private static void charAndSum(ArrayList<String> s,int index){
+        int sum=0;
+        char[] chars=s.get(index).toCharArray();
+        for (int i=1;i<chars.length-1;i++)
+             sum+=chars[i]-'A'+1;
+        sum*=(index+1);
+        BigInteger b=BigInteger.valueOf(sum);
+        result=result.add(b);
+    }
+}
